@@ -3,8 +3,8 @@ resource "aws_s3_bucket" "doctolib_technical_test_bucket" {
 }
 
 resource "aws_s3_bucket_acl" "doctolib_technical_test_bucket_acl" {
-    bucket = aws_s3_bucket.doctolib_technical_test_bucket.id
-    acl = var.acl_value  
+  bucket = aws_s3_bucket.doctolib_technical_test_bucket.id
+  acl    = var.acl_value
 }
 
 resource "aws_s3_bucket_policy" "s3_bucket_policy" {
@@ -13,7 +13,7 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
-    {
+      {
         Sid       = "Allowputobjecttocanbewrittenonly"
         Principal = "*"
         Effect    = "Deny"
@@ -21,8 +21,8 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
         NotResource = [
           "${aws_s3_bucket.doctolib_technical_test_bucket.arn}/can_be_written/*",
         ]
-    },
-    {
+      },
+      {
         Sid       = "AllowAllforIPMachine"
         Principal = "*"
         Effect    = "Allow"
@@ -31,12 +31,12 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
           "${aws_s3_bucket.doctolib_technical_test_bucket.arn}/can_be_written/*",
         ],
         Condition = {
-            IpAddress = {
-                "aws:SourceIp": var.ip
-            }
+          IpAddress = {
+            "aws:SourceIp" : var.ip
+          }
         }
-    },
-    {
+      },
+      {
         Sid       = "DenyAllNotIPMachine"
         Principal = "*"
         Effect    = "Deny"
@@ -45,12 +45,11 @@ resource "aws_s3_bucket_policy" "s3_bucket_policy" {
           "${aws_s3_bucket.doctolib_technical_test_bucket.arn}/can_be_written/*",
         ],
         Condition = {
-            NotIpAddress = {
-                "aws:SourceIp": var.ip
-            }
+          NotIpAddress = {
+            "aws:SourceIp" : var.ip
+          }
         }
       }
     ]
   })
 }
-

@@ -1,9 +1,7 @@
 variable "ssh_user_name" {
-default = "ubuntu"
+  default = "ubuntu"
 }
 
-variable "ec2_instance" {
-}
+variable "ec2_instance" {}
 
-variable "pem" {
-}
+variable "pem" {}

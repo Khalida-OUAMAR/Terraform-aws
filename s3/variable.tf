@@ -1,8 +1,7 @@
 variable "bucket_name" {}
 
 variable "acl_value" {
-    default = "private"
+  default = "private"
 }
 
-variable ip {
-}
+variable "ip" {}

@@ -3,8 +3,8 @@ resource "null_resource" "ssh_target" {
   connection {
     type        = "ssh"
     private_key = var.pem
-    user = var.ssh_user_name
-    host = var.ec2_instance.public_ip
+    user        = var.ssh_user_name
+    host        = var.ec2_instance.public_ip
     port        = 22
   }
 
